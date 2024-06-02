@@ -312,6 +312,8 @@ const deleteExistingTransaction = async function (transactionId) {
  * @param {string} userId
  * @param {number} maxNum
  */
+
+
 const getTransactionsForUser = async function (userId, maxNum) {
   const results = await db.all(
     `SELECT transactions.*,
@@ -328,6 +330,18 @@ const getTransactionsForUser = async function (userId, maxNum) {
     maxNum
   );
   return results;
+};
+
+const getTransactionsSum = async function (userId) {
+  const results = await db.all(
+    `SELECT transactions.*,
+      sum(amount)
+    FROM transactions
+    WHERE transactions.user_id = ?
+    `,
+    userId
+  );
+  return results
 };
 
 /**
@@ -371,5 +385,6 @@ module.exports = {
   deleteExistingTransaction,
   markTransactionAsRemoved,
   getTransactionsForUser,
+ getTransactionsSum,
   saveCursorForItem,
 };

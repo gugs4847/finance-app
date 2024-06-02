@@ -12,6 +12,7 @@ class SimpleTransaction {
     authorizedDate,
     name,
     amount,
+    total,
     currencyCode,
     pendingTransactionId
   ) {
@@ -23,6 +24,7 @@ class SimpleTransaction {
     this.authorizedDate = authorizedDate;
     this.name = name;
     this.amount = amount;
+    this.total = total;
     this.currencyCode = currencyCode;
     this.pendingTransactionId = pendingTransactionId;
   }

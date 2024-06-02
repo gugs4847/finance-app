@@ -66,6 +66,19 @@ const showTransactionData = (txnData) => {
   document.querySelector("#transactionTable").innerHTML = tableRows.join("\n");
 };
 
+const getTransactionSum = (txnData) => {
+  let amount = 0;
+  for (let x = 0; x < txnData.length; x++ ) {
+    amount += txnData[x].amount;
+  }
+  amount = Math.round((amount + Number.EPSILON) * 100) / 100;
+  const tableRows = 
+   `<tr>
+    <td>${amount}</td>
+    </tr>`
+  document.querySelector("#totalTable").innerHTML = tableRows;
+};
+
 const connectToBank = async () => {
   await startLink(() => {
     refreshConnectedBanks();
@@ -75,6 +88,7 @@ const connectToBank = async () => {
 export const clientRefresh = async () => {
   const txnData = await callMyServer("/server/transactions/list?maxCount=50");
   showTransactionData(txnData);
+  getTransactionSum(txnData);
 };
 
 const serverRefresh = async () => {
