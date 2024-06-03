@@ -68,13 +68,46 @@ const showTransactionData = (txnData) => {
 
 const getTransactionSum = (txnData) => {
   let amount = 0;
+
+  let checking = [];
+  let checking_count = 0;
+  let checking_amount = 0;
+
+  let savings = [];
+  let savings_count = 0;
+  let savings_amount = 0;
+
   for (let x = 0; x < txnData.length; x++ ) {
     amount += txnData[x].amount;
-  }
+
+    // Checking will search for 'Checking, Credit Card' in acct name and save the amount.
+    // Else, the number will be saved in the 'savings' amount.
+    if ((txnData[x].account_name.search('Checking') > 0) || (txnData[x].account_name.search('Credit') > 0))
+      {
+        checking[checking_count] = txnData[x].account_name;
+        checking_amount += txnData[x].amount;
+        checking_count += 1;
+      }
+    else 
+      {
+        savings[savings_count] = txnData[x].account_name;  
+        savings_amount += txnData[x].amount;
+        savings_count += 1;
+      }
+  };
   amount = Math.round((amount + Number.EPSILON) * 100) / 100;
+  checking_amount = Math.round((checking_amount + Number.EPSILON) * 100) / 100;
+  savings_amount = Math.round((savings_amount + Number.EPSILON) * 100) / 100;
   const tableRows = 
+  
    `<tr>
-    <td>${amount}</td>
+      <td>Your Total Amount: ${amount}</td>
+    </tr>
+    <tr>
+      <td>Your Total Checking Amount: ${checking_amount}</td>
+    </tr>
+    <tr>
+      <td>Your Total Savings Amount: ${savings_amount}</td>
     </tr>`
   document.querySelector("#totalTable").innerHTML = tableRows;
 };
