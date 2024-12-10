@@ -25,9 +25,9 @@ An app to track my spending and my investing each month. Uses Plaid API, React, 
 
 
 # To-do, Extended
-- ~~ Use Plaid to connect to banks ~~
+- ~~Use Plaid to connect to banks~~
 - Use the financial data from banks to sort output into categories
-- ~~ Show weekend, weekly, and monthly spending ~~
+- ~~Show weekend, weekly, and monthly spending~~
 - Notifications for weekly spending
 - Show reoccurring bills
 - Send info to personal finance sheet if able
